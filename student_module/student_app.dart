@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_application_1/student_module/student_font_logic.dart';
+// import 'package:flutter_application_1/student_module/student_screen.dart';
+// import 'package:flutter_application_1/student_module/student_theme_logic.dart';
+import 'package:flutter_project/student_module/student_font_logic.dart';
+import 'package:flutter_project/student_module/student_screen.dart';
+import 'package:flutter_project/student_module/student_theme_logic.dart';
 import 'package:provider/provider.dart';
-import 'font_logic.dart';
-import 'main_screen.dart';
-import 'theme_logic.dart';
 
-class BasicApp extends StatelessWidget {
+class StudentApp extends StatelessWidget {
   double _size = 0;
 
-  BasicApp({super.key});
   @override
   Widget build(BuildContext context) {
-    _size = context.watch<FontLogic>().size;
+    _size = context.watch<StudentFontLogic>().size;
 
-    int themeIndex = context.watch<ThemeLogic>().themeIndex;
+    int themeIndex = context.watch<StudentThemeLogic>().themeIndex;
     ThemeMode mode = ThemeMode.system;
     switch (themeIndex) {
       case 1:
@@ -25,7 +27,7 @@ class BasicApp extends StatelessWidget {
         mode = ThemeMode.system;
     }
     return MaterialApp(
-      home: MainScreen(),
+      home: StudentScreen(),
       themeMode: mode,
       theme: _lightTheme(),
       darkTheme: _darkTheme(),
@@ -37,6 +39,11 @@ class BasicApp extends StatelessWidget {
     return ThemeData(
       brightness: Brightness.light,
       textTheme: TextTheme(bodyMedium: TextStyle(fontSize: _size)),
+      listTileTheme: ListTileThemeData(
+        textColor: Colors.black,
+        iconColor: col1,
+        titleTextStyle: TextStyle(fontSize: _size),
+      ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: col1,
@@ -80,6 +87,7 @@ class BasicApp extends StatelessWidget {
       listTileTheme: ListTileThemeData(
         textColor: Colors.white,
         iconColor: col1,
+        titleTextStyle: TextStyle(fontSize: _size),
       ),
     );
   }
